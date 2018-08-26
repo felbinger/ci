@@ -1,2 +1,0 @@
-Wenn eine Flag übermittelt wurde, und diese korrekt war, verschwindet das Übermittlungsfeld für die Flag in dieser Challenge. In der Liste (solved Challenges) in account.html wird die challenge hinzugefügt
-Die Challenge wird zu panel-success
