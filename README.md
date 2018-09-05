@@ -3,7 +3,7 @@
 * Startseite
   * Statistiken
   * Chat
-* Challenges in Kategorien (Coding/Hacking/Special) auflisten
+* Challenges in dynamischen Kategorien (aktuell Coding/Hacking/Special) auflisten
   * Bereits gelöste Challenges markieren (Farblich anders darstellen)
   * Flags übermitteln
 * Admin: Dashboard
@@ -20,11 +20,19 @@
   * Rollenverwaltung
     * existierende darstellen (Tabelle)
     * Rolle erstellen
-    * Rolle bearbeiten (Description)
+    * Rolle bearbeiten (description)
     * Rolle löschen
   * Challenge Verwaltung
+    * existierende darstellen (Tabelle)
     * Challenge erstellen
-    * Challenge bearbeiten (YouTube Challenge/Solution Video ID hinzufügen)
+    * Challenge bearbeiten
+      * YouTube Challenge/Solution Video ID bearbeiten
+      * URL's hinzufügen/bearbeiten/löschen
+  * Verwaltung der Kategorien
+    * existierende darstellen (Tabelle)
+    * Kategorie erstellen
+    * Kategorie bearbeiten (description)
+    * Kategorie löschen
 * Account Seite
   * für das Ändern von E-Mail und Passwort
   * zum einsehen der bereits gelösten Challenges
