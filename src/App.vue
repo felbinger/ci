@@ -6,11 +6,7 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
 @Component
-export default class App extends Vue {
-  created() {
-    console.log(this.$route);
-  }
-}
+export default class App extends Vue {}
 </script>
 
 

@@ -1,6 +1,6 @@
 <template>
-    <div id="wrapper">
-        / <span v-for="(route, index) in $route.matched" v-bind:key="index" v-if="route.name !== undefined">&nbsp;<router-link class="router-link" :to="{ path: route.path }">{{ route.name }}</router-link> / </span>
+    <div id="path">
+        /&nbsp;<router-link :to="{ path: '/' }" class="router-link">home</router-link>&nbsp;/&nbsp;<span v-for="(route, index) in $route.matched" v-bind:key="index" v-if="route.name !== undefined"><router-link class="router-link" :to="{ path: route.path }">{{ route.name }}</router-link>&nbsp;/&nbsp;</span>
     </div>
 </template>
 
@@ -11,8 +11,8 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class Pathname extends Vue {}
 </script>
 
-<style>
-#path #wrapper {
+<style scoped>
+#path {
   width: 100%;
   height: 100%;
   padding-left: 10px;

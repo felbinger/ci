@@ -5,9 +5,11 @@ import Account from '@/views/Account.vue';
 import Challenges from '@/views/Challenges.vue';
 import Challenge from '@/views/Challenge.vue';
 import AllChallenges from '@/views/AllChallenges.vue';
-import CodingChallenges from '@/views/CodingChallenges.vue';
-import HackingChallenges from '@/views/HackingChallenges.vue';
+/*import CodingChallenges from '@/views/CodingChallenges.vue';
+import HackingChallenges from '@/views/HackingChallenges.vue';*/
+import Category from '@/views/Category.vue';
 import Feedback from '@/views/Feedback.vue';
+import Register from '@/views/Register.vue';
 import Login from '@/views/Login.vue';
 
 Vue.use(Router);
@@ -17,17 +19,37 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      redirect: '/home'
-    },
-    {
       path: '/login',
-      component: Login
+      component: Login,
+      beforeEnter: (to, from, next) => {
+        const token =
+          localStorage.getItem('Token') || sessionStorage.getItem('Token');
+
+        if (token) {
+          next({ path: '/' });
+        } else {
+          next();
+        }
+      }
     },
     {
-      path: '/home',
-      name: 'home',
+      path: '/register',
+      component: Register
+    },
+    {
+      path: '/',
+      alias: '/home',
       component: Home,
+      beforeEnter: (to, from, next) => {
+        const token =
+          localStorage.getItem('Token') || sessionStorage.getItem('Token');
+
+        if (!token) {
+          next({ path: '/login' });
+        } else {
+          next();
+        }
+      },
       children: [
         {
           path: 'me',
@@ -48,7 +70,7 @@ export default new Router({
               name: 'all',
               component: AllChallenges
             },
-            {
+            /*{
               path: 'hacking',
               name: 'hacking',
               component: HackingChallenges
@@ -57,9 +79,15 @@ export default new Router({
               path: 'coding',
               name: 'coding',
               component: CodingChallenges
+            },*/
+            {
+              path: 'category/:category',
+              name: 'category',
+              component: Category
             },
             {
               path: ':id',
+              name: 'challenge',
               component: Challenge
             }
           ]

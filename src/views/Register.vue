@@ -5,8 +5,8 @@
                 <li v-for="(error, index) in errors" v-bind:key="index">{{ error }}</li>
             </ul>
             <p><label for="name">Name</label><input id="name" v-model="username"></p>
+            <p><label for="email">Email</label><input id="email" v-model="email"></p>
             <p><label for="password">Password</label><input type="password" id="password" v-model="password"></p>
-            <p><label for="keepLoggedIn">Keep logged in</label><input type="checkbox" v-model="keepLoggedIn"></p>
             <button :disabled="errors.length !== 0" type="submit">Submit</button>
         </form>
     </div>
@@ -18,8 +18,8 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class Login extends Vue {
   username = '';
+  email = '';
   password = '';
-  keepLoggedIn = false;
   errors: Array<string> = [];
 
   validate() {
@@ -27,6 +27,10 @@ export default class Login extends Vue {
 
     if (!this.username || !this.password) {
       this.errors.push('Please enter all fields.');
+    }
+
+    if (this.password.length < 8) {
+      this.errors.push('The password must be at least 8 characters long.');
     }
 
     if (this.username.length >= 200 || this.password.length >= 200) {
@@ -49,10 +53,6 @@ export default class Login extends Vue {
       .then(response => response.json(), response => response.json())
       .then(json => {
         if (json.token) {
-          this.keepLoggedIn
-            ? localStorage.setItem('Token', json.token)
-            : sessionStorage.setItem('Token', json.token);
-
           this.$router.push({ path: '/' });
         } else {
           this.errors = this.errors.concat(json.errors);
