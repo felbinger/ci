@@ -42,7 +42,7 @@ export default new Router({
         const token =
           localStorage.getItem('Token') || sessionStorage.getItem('Token');
 
-        Vue.http
+        (Vue as any).http
           .get('https://challenges.the-morpheus.de/api/auth', {
             headers: { 'Access-Token': token }
           })
