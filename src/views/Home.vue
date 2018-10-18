@@ -3,13 +3,17 @@
     <div id="sidebar"><Sidebar/></div>
     <div id="content">
       <div id="path"><Pathname/></div>
-      <div id="router"><router-view /></div>
+      <div id="router">
+        <transition name="slide" mode="out-in">
+          <router-view/>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import Sidebar from '@/components/Sidebar.vue';
 import Pathname from '@/components/Pathname.vue';
 
@@ -22,14 +26,8 @@ import Pathname from '@/components/Pathname.vue';
 export default class Home extends Vue {}
 </script>
 
-
 <style>
 #home {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   width: 100%;
   height: 100%;
 }
@@ -54,5 +52,6 @@ export default class Home extends Vue {}
 #router {
   width: 100%;
   height: 95%;
+  overflow-y: scroll;
 }
 </style>

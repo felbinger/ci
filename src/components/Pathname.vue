@@ -21,10 +21,6 @@ export default class Pathname extends Vue {}
   align-items: center;
 }
 
-#path .router-link {
-  color: #0645ad !important;
-}
-
 #path .router-link-exact-active {
   font-weight: bold;
 }

@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div v-if="challenges.length">
         <h1>CHALLENGES</h1>
         <ul>
-            <router-link v-for="(challenge, index) in challenges" v-bind:key="index" tag="li" :to="{ name: 'challenge', params: { id: challenge.id }}">{{ challenge.name }}</router-link>
+          <router-link v-for="(challenge, index) in challenges" v-bind:key="index" tag="li" :to="{ name: 'challenge', params: { id: challenge.id }}">{{ challenge.name }}</router-link>
         </ul>
     </div>
 </template>

@@ -30,13 +30,12 @@ li {
   text-align: left;
   width: 100%;
   display: flex;
-  height: 25px;
   align-items: center;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.1s;
 }
 
 li:hover {
-  text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
+  text-shadow: 0.1px 0.1px 0.1px rgba(0, 0, 0, 0.5);
 }
 </style>

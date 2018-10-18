@@ -6,11 +6,11 @@
         <h1>
           {{ challenge.name }}
           <span id="rate">
-            <span @click.native="like" :class="{ rate: true, active: liked }"><material-icon name="thumb_up" />{{ challenge.ratings.thumbUp }}</span>
-            <span @click.native="dislike" :class="{ rate: true, active: disliked }"><material-icon name="thumb_down" />{{ challenge.ratings.thumbDown }}</span>
+            <span @click="like" :class="{ rate: true, active: liked }"><material-icon name="thumb_up" />{{ challenge.ratings.thumbUp }}</span>
+            <span @click="dislike" :class="{ rate: true, active: disliked }"><material-icon name="thumb_down" />{{ challenge.ratings.thumbDown }}</span>
           </span>
         </h1>
-        <h2>({{ challenge.points }} points, {{ challenge.solved }} solved)</h2>
+        <h2>({{ challenge.points }} points, {{ challenge.solveCount }} solved)</h2>
         <div>
           {{ challenge.description }}<br>
           <label for="solve">Flag: </label><input id="solve" :disabled="!challenge.solve" :placeholder="!challenge.solve ? 'Already solved!' : 'TMT{y0ur_fl4g}'">
@@ -39,7 +39,7 @@ import MaterialIcon from '@/components/MaterialIcon.vue';
 export default class Login extends Vue {
   token = localStorage.getItem('Token') || sessionStorage.getItem('Token');
   errors: string[] = [];
-  challenge = {};
+  challenge = { ratings: {} };
   liked: boolean = false;
   disliked: boolean = false;
 
@@ -93,7 +93,8 @@ h1 {
   opacity: 1;
 }
 
-#rate * {
+.rate {
+  cursor: pointer;
   padding: 2.25px;
   transition: color 0.25s;
 }
@@ -110,8 +111,8 @@ h2 {
 }
 
 div {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #urls {
@@ -123,6 +124,7 @@ div {
 
 #urls li {
   width: 100%;
+  font-size: 1.5vw;
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;

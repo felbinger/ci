@@ -4,9 +4,7 @@ import Home from '@/views/Home.vue';
 import Account from '@/views/Account.vue';
 import Challenges from '@/views/Challenges.vue';
 import Challenge from '@/views/Challenge.vue';
-import AllChallenges from '@/views/AllChallenges.vue';
-/*import CodingChallenges from '@/views/CodingChallenges.vue';
-import HackingChallenges from '@/views/HackingChallenges.vue';*/
+import ListChallenges from '@/views/ListChallenges.vue';
 import Category from '@/views/Category.vue';
 import Feedback from '@/views/Feedback.vue';
 import Register from '@/views/Register.vue';
@@ -44,11 +42,23 @@ export default new Router({
         const token =
           localStorage.getItem('Token') || sessionStorage.getItem('Token');
 
-        if (!token) {
-          next({ path: '/login' });
-        } else {
-          next();
-        }
+        Vue.http
+          .get('https://challenges.the-morpheus.de/api/auth', {
+            headers: { 'Access-Token': token }
+          })
+          .then(
+            (response: any) => response.json(),
+            (response: any) => response.json()
+          )
+          .then((json: any) => {
+            if (!token || json.statusCode === 401) {
+              localStorage.removeItem('Token');
+              sessionStorage.removeItem('Token');
+              next({ path: '/login' });
+            } else {
+              next();
+            }
+          });
       },
       children: [
         {
@@ -68,22 +78,7 @@ export default new Router({
             {
               path: 'all',
               name: 'all',
-              component: AllChallenges
-            },
-            /*{
-              path: 'hacking',
-              name: 'hacking',
-              component: HackingChallenges
-            },
-            {
-              path: 'coding',
-              name: 'coding',
-              component: CodingChallenges
-            },*/
-            {
-              path: 'category/:category',
-              name: 'category',
-              component: Category
+              component: ListChallenges
             },
             {
               path: ':id',
@@ -91,6 +86,11 @@ export default new Router({
               component: Challenge
             }
           ]
+        },
+        {
+          path: 'category/:category',
+          name: 'category',
+          component: Category
         },
         {
           path: 'feedback',
