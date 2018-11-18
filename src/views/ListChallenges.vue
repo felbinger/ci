@@ -11,7 +11,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class AllChallenges extends Vue {
+export default class ListChallenges extends Vue {
   token = localStorage.getItem('Token') || sessionStorage.getItem('Token');
   challenges = [];
 

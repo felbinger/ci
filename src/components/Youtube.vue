@@ -1,5 +1,5 @@
 <template>
-    <iframe v-if="videoId" :src="'https://www.youtube.com/embed/' + videoId" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe v-if="videoId" :src="'https://www.youtube.com/embed/' + videoId" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </template>
 
 <script lang="ts">

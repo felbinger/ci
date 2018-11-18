@@ -36,7 +36,7 @@ import MaterialIcon from '@/components/MaterialIcon.vue';
     MaterialIcon
   }
 })
-export default class Login extends Vue {
+export default class Challenge extends Vue {
   token = localStorage.getItem('Token') || sessionStorage.getItem('Token');
   errors: string[] = [];
   challenge = { ratings: {} };
