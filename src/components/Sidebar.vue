@@ -36,10 +36,10 @@ export default class Sidebar extends Vue {
       headers: { 'Access-Token': this.token }
     });
 
-    localStorage.removeItem('Token');
-    sessionStorage.removeItem('Token');
+    localStorage.clear();
+    sessionStorage.clear();
 
-    this.$router.push({ path: '/login' });
+    this.$router.push({ path: '/signin' });
   }
 }
 </script>

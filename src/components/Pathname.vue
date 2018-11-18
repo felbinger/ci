@@ -1,7 +1,7 @@
 <template>
-    <div id="path">
-        /&nbsp;<router-link :to="{ path: '/' }" class="router-link">home</router-link>&nbsp;/&nbsp;<span v-for="(route, index) in $route.matched" v-bind:key="index" v-if="route.name !== undefined"><router-link class="router-link" :to="{ path: route.path }">{{ route.name }}</router-link>&nbsp;/&nbsp;</span>
-    </div>
+  <div id="path">
+    /&nbsp;<router-link :to="{ path: '/' }" class="router-link">home</router-link>&nbsp;/&nbsp;<span v-for="(route, index) in $route.matched" v-bind:key="index" v-if="route.name !== undefined"><router-link class="router-link" :to="{ path: route.path }">{{ route.name }}</router-link>&nbsp;/&nbsp;</span>
+  </div>
 </template>
 
 <script lang="ts">

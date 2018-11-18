@@ -15,8 +15,10 @@ export default class App extends Vue {}
   height: 100%;
 }
 
-a {
+a,
+.link {
   color: #2943d4;
+  cursor: pointer;
 }
 
 .slide-enter-active {

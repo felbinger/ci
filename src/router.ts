@@ -7,8 +7,8 @@ import Challenge from '@/views/Challenge.vue';
 import ListChallenges from '@/views/ListChallenges.vue';
 import Category from '@/views/Category.vue';
 import Feedback from '@/views/Feedback.vue';
-import Register from '@/views/Register.vue';
-import Login from '@/views/Login.vue';
+import SignUp from '@/views/SignUp.vue';
+import SignIn from '@/views/SignIn.vue';
 
 Vue.use(Router);
 
@@ -17,8 +17,8 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
-      component: Login,
+      path: '/signin',
+      component: SignIn,
       beforeEnter: (to, from, next) => {
         const token =
           localStorage.getItem('Token') || sessionStorage.getItem('Token');
@@ -31,8 +31,18 @@ export default new Router({
       }
     },
     {
-      path: '/register',
-      component: Register
+      path: '/signup',
+      component: SignUp,
+      beforeEnter: (to, from, next) => {
+        const token =
+          localStorage.getItem('Token') || sessionStorage.getItem('Token');
+
+        if (token) {
+          next({ path: '/' });
+        } else {
+          next();
+        }
+      }
     },
     {
       path: '/',

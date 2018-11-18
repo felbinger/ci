@@ -1,7 +1,7 @@
 <template>
-    <ul>
-        <router-link tag="li" v-for="(category, index) in categories" v-bind:key="index" :to="{ name: 'category', params: { category: category.name }}">{{ category.description }}</router-link>
-    </ul>
+  <ul>
+    <router-link tag="li" v-for="(category, index) in categories" v-bind:key="index" :to="{ name: 'category', params: { category: category.name }}">{{ category.description }}</router-link>
+  </ul>
 </template>
 
 <script lang="ts">
