@@ -20,11 +20,17 @@ export default class Category extends Vue {
   challenges = [];
   errors = [];
 
-  fetch(name: string) {
+  @Watch('$route', { immediate: true })
+  fetch(from: any, to: any) {
     this.$http
-      .get(`https://challenges.the-morpheus.de/api/categories/${name}`, {
-        headers: { 'Access-Token': this.token }
-      })
+      .get(
+        `https://challenges.the-morpheus.de/api/categories/${
+          from.params.category
+        }`,
+        {
+          headers: { 'Access-Token': this.token }
+        }
+      )
       .then(response => response.json(), response => response.json())
       .then(json => {
         this.errors = json.errors;
@@ -42,15 +48,6 @@ export default class Category extends Vue {
           (el: any) => el.category.name == this.category.name
         );
       });
-  }
-
-  created() {
-    this.fetch(this.$route.params.category);
-  }
-
-  @Watch('$route')
-  routeChanged(from: any, to: any) {
-    this.fetch(from.params.category);
   }
 }
 </script>
