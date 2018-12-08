@@ -1,21 +1,27 @@
 <template>
   <div>
-    <ul v-if="errors.length">
-      <li v-for="(error, index) in errors" v-bind:key="index">{{ error }}</li>
-    </ul>
     <form @submit="signin" @input="validate">
       <h1>Sign In</h1>
+      <ul v-if="errors.length">
+        <li v-for="(error, index) in errors" v-bind:key="index">{{ error }}</li>
+      </ul>
       <table>
         <tr>
           <td>Name</td>
-          <td><input type="text" v-model="username"></td>
+          <td>
+            <input type="text" v-model="username">
+          </td>
         </tr>
         <tr>
           <td>Password</td>
-          <td><input type="password" v-model="password"></td>
+          <td>
+            <input type="password" v-model="password">
+          </td>
         </tr>
         <tr>
-          <td><button :disabled="disabled" type="submit">Submit</button></td>
+          <td>
+            <button :disabled="disabled" type="submit">Submit</button>
+          </td>
           <td style="text-align: right;">
             <input type="checkbox" v-model="keepLoggedIn">
             <label>Keep logged in</label>
@@ -28,30 +34,26 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class SignIn extends Vue {
   disabled = true;
-  username = '';
-  password = '';
+  username = "";
+  password = "";
   keepLoggedIn = false;
   errors: Array<string> = [];
-
-  created() {
-    this.validate();
-  }
 
   validate() {
     this.errors = [];
 
     if (!this.username || !this.password) {
-      this.errors.push('Please enter all fields.');
+      this.errors.push("Please enter all fields.");
     }
 
     if (this.username.length >= 200 || this.password.length >= 200) {
       this.errors.push(
-        'The username or password must be under 200 characters long'
+        "The username or password must be under 200 characters long"
       );
     }
 
@@ -67,15 +69,15 @@ export default class SignIn extends Vue {
     };
 
     this.$http
-      .post('https://challenges.the-morpheus.de/api/auth', data)
+      .post("https://challenges.the-morpheus.de/api/auth", data)
       .then(response => response.json(), response => response.json())
       .then(json => {
         if (json.token) {
           this.keepLoggedIn
-            ? localStorage.setItem('Token', json.token)
-            : sessionStorage.setItem('Token', json.token);
+            ? localStorage.setItem("Token", json.token)
+            : sessionStorage.setItem("Token", json.token);
 
-          this.$router.push({ path: '/' });
+          this.$router.push({ path: "/" });
         } else {
           this.errors = this.errors.concat(json.errors);
         }
@@ -88,9 +90,10 @@ export default class SignIn extends Vue {
 div {
   width: 100%;
   height: 100%;
-  background-image: url('../assets/login_background.png');
+  background-image: url("../assets/login_background.png");
   background-position: center;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,7 +118,8 @@ table {
 }
 
 ul {
-  color: #ffffff;
+  padding: 0;
+  color: #ff1818;
   list-style: none;
 }
 </style>

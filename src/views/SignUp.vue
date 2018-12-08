@@ -1,46 +1,56 @@
 <template>
-    <div>
+  <div>
+    <form @submit="signup" @input="validate">
+      <h1>Sign Up</h1>
       <ul v-if="errors.length">
         <li v-for="(error, index) in errors" v-bind:key="index">{{ error }}</li>
       </ul>
-      <form @submit="signup" @input="validate">
-        <h1>Sign Up</h1>
-        <table>
-          <tr>
-            <td>Name</td>
-            <td><input type="text" v-model="username"></td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td><input type="email" v-model="email"></td>
-          </tr>
-          <tr>
-            <td>Password</td>
-            <td><input type="password" v-model="password"></td>
-          </tr>
-          <tr>
-            <td>Validate Password</td>
-            <td><input type="password" v-model="validate_password"></td>
-          </tr>
-          <tr>
-            <td colspan="2"><button :disabled="disabled" type="submit">Submit</button></td>
-          </tr>
-        </table>
-        <router-link tag="p" class="link" :to="{path: '/signin'}">Sign In</router-link>
-      </form>
-    </div>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>
+            <input type="text" v-model="username">
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>
+            <input type="email" v-model="email">
+          </td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>
+            <input type="password" v-model="password">
+          </td>
+        </tr>
+        <tr>
+          <td>Validate Password</td>
+          <td>
+            <input type="password" v-model="validate_password">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button :disabled="disabled" type="submit">Submit</button>
+          </td>
+        </tr>
+      </table>
+      <router-link tag="p" class="link" :to="{path: '/signin'}">Sign In</router-link>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class SignUp extends Vue {
   disabled = true;
-  username = '';
-  email = '';
-  password = '';
-  validate_password = '';
+  username = "";
+  email = "";
+  password = "";
+  validate_password = "";
   errors: Array<string> = [];
 
   validate() {
@@ -52,21 +62,21 @@ export default class SignUp extends Vue {
       !this.password ||
       !this.validate_password
     ) {
-      this.errors.push('Please enter all fields.');
+      this.errors.push("Please enter all fields.");
     }
 
     if (this.password.length < 8) {
-      this.errors.push('The password must be at least 8 characters long.');
+      this.errors.push("The password must be at least 8 characters long.");
     }
 
     if (this.username.length >= 200 || this.password.length >= 200) {
       this.errors.push(
-        'The username or password must be under 200 characters long'
+        "The username or password must be under 200 characters long"
       );
     }
 
     if (this.validate_password !== this.password) {
-      this.errors.push('Please validate the password.');
+      this.errors.push("Please validate the password.");
     }
 
     this.disabled = this.errors.length !== 0;
@@ -81,11 +91,11 @@ export default class SignUp extends Vue {
     };
 
     this.$http
-      .post('https://challenges.the-morpheus.de/api/auth', data)
+      .post("https://challenges.the-morpheus.de/api/auth", data)
       .then(response => response.json(), response => response.json())
       .then(json => {
         if (json.token) {
-          this.$router.push({ path: '/' });
+          this.$router.push({ path: "/" });
         } else {
           this.errors = this.errors.concat(json.errors);
         }
@@ -98,9 +108,10 @@ export default class SignUp extends Vue {
 div {
   width: 100%;
   height: 100%;
-  background-image: url('../assets/login_background.png');
+  background-image: url("../assets/login_background.png");
   background-position: center;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,7 +136,8 @@ table {
 }
 
 ul {
-  color: #ffffff;
+  padding: 0;
+  color: #ff1818;
   list-style: none;
 }
 </style>
